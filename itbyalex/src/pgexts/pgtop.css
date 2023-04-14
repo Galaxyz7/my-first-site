@@ -1,0 +1,12 @@
+.top {
+    display: inline-flex;
+    border: 1px solid  black;
+    border-radius: 15px;
+    color: rgb(76, 6, 117);
+    text-shadow: -2px 5px 3px rgba(73,65,66,0.66);
+    }
+  .topd {
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+  }

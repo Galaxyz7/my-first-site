@@ -1,0 +1,10 @@
+.top {
+  display: inline-flex;
+  border: 1px solid  black;
+  border-radius: 20px;
+  }
+.topd {
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+}
