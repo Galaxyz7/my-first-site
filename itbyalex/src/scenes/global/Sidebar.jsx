@@ -41,8 +41,7 @@ const Sidebar = () => {
     const [selected, setSelected] = useState("Dashboard")
 
     return (
-        <Box
-            sx={{
+        <Box sx={{
                 "& .pro-sidebar-inner": {
                     background: `${colors.primary[400]} !important`,
                 },
@@ -62,7 +61,7 @@ const Sidebar = () => {
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
-                <Menu iconShape="square">
+                <Menu iconShape="square" >
                 {/* LOGO AND MENU ICON */}
                 <MenuItem
                     onClick={() => setIsCollapsed(!isCollapsed)}
@@ -91,28 +90,28 @@ const Sidebar = () => {
 
                 {!isCollapsed && (
                     <Box mb="25px">
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                        <img
-                        alt="profile-user"
-                        width="100px"
-                        height="100px"
-                        src={userImage}
-                        style={{ cursor: "pointer", borderRadius: "50%" }}
-                        />
-                    </Box>
-                    <Box textAlign="center">
-                        <Typography
-                        variant="h2"
-                        color={colors.grey[100]}
-                        fontWeight="bold"
-                        sx={{ m: "10px 0 0 0" }}
-                        >
-                        Welcome
-                        </Typography>
-                        <Typography variant="h5" color={colors.greenAccent[500]}>
-                        A thoughtful website for IT
-                        </Typography>
-                    </Box>
+                        <Box display="flex" justifyContent="center" alignItems="center" >
+                            <img
+                            alt="profile-user"
+                            width="100px"
+                            height="100px"
+                            src={userImage}
+                            style={{ cursor: "pointer", borderRadius: "50%" }}
+                            />
+                        </Box>
+                        <Box textAlign="center">
+                            <Typography
+                            variant="h2"
+                            color={colors.grey[100]}
+                            fontWeight="bold"
+                            sx={{ m: "10px 0 0 0" }}
+                            >
+                            Welcome
+                            </Typography>
+                            <Typography variant="h5" color={colors.greenAccent[500]}>
+                            A thoughtful website for IT
+                            </Typography>
+                        </Box>
                     </Box>
                 )}
 

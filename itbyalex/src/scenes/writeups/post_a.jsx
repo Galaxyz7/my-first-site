@@ -10,9 +10,11 @@ const PostA = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeA);
+  };
   
-  const codeBlock = `
+  const codeA = `
     {"<"}VirtualHost (IP or *):443{">"}
         ServerName (server-ip-or-hostname)
         DocumentRoot /var/www/html    
@@ -28,22 +30,40 @@ const PostA = () => {
     {"<"/}VirtualHost{">"}
     `;
 
-    const firstText = `    1.) Install apache 2 and openssl with you favorite package manager.
+    const firstText = `1.) Install apache 2 and openssl with you favorite package manager.
     
-    2.) Open ports 80 and or 443 on desired zone on the OS Firewall (and port forward on the Router/Network Firewall
-    if you want anyone from outside your Local network to access it. )
-    *Before port forwarding on your router you will want to make sure you have a good understanding of
-    network security.
 
-    3.) Reload firewall
+2.) Open ports 80 and or 443 on desired zone on the OS Firewall 
+(and port forward on the Router/Network Firewall if you want anyone from 
+outside your Local network to access it. )
+    
+*Before port forwarding on your router you will want to make sure you have a good 
+understanding of network security.
 
-    4.) Move .cert to /etc/ssl/certs 
-    and the .key to /etc/ssl/private
 
-    5.) Create new config file in /etc/apache2/sites-available/server-ip-or-hostname.conf, I added a port 80 redirect 
-    to 443 to always keep users traffic on https.  (you may copy below and edit anything i
+3.) Reload firewall
+
+
+4.) Move .cert to /etc/ssl/certs and the .key to /etc/ssl/private
+
+
+5.) Create new config file by pasting the text below at 
+
+/etc/apache2/sites-available/server-ip-or-hostname.conf  
+
+I added a port 80 redirect to 443 to always keep users traffic on https.  
+*change anything in parenthesis and remove parenthesis
 
     `;
+
+    const secondText = `
+    6.) Reload apache2 with sudo systemctl restart apache2
+
+    Now you should be good as long as certs are valid, ports are open, and service is running. 
+    If there are any other files in the /etc/apache2/sites-available/ directory you can rename 
+    them to old and also change the file in /var/www/ to match DocumentRoot name in Conf file. 
+    
+    `
 
     const codeStyle = {
       display: 'block',
@@ -76,36 +96,52 @@ const PostA = () => {
               width: '80%',
               margin: '0 auto',
               padding: '1rem',
+              textAlign: 'center',
             }}>
               <pre>
 {firstText}
               </pre>
           </Box>
-          <div style = {{
-            '--opac': '1',
-            backgroundColor: "rgba(52,53,65,var(--opac))",
-            display: 'flex',
-            margin: '0 auto',
-            width: '80%',
-            borderRadius: '5px',
-          }}
-          >
-            <span style={{ 
-              marginLeft: '5px',
-              marginTop: '5px',
-            }}>
-                Code
-            </span>
-            <button style = {{ marginLeft: 'auto', marginRight: '0' }}>
-              <ContentCopyIcon />
-              Copy
-            </button>
-          </div>
-          <Box>         
-              <code style={codeStyle}
-            dangerouslySetInnerHTML={{ __html: codeBlock }}></code>
-            
 
+          <div style = {{
+            display: 'block',
+            borderRadius: '10px',
+          }}>
+            <div style = {{
+              '--opac': '1',
+              backgroundColor: colors.grey[1000],
+              display: 'flex',
+              margin: '0 auto',
+              width: '80%',
+            }}
+            >
+              <span style={{ 
+                marginLeft: '5px',
+                marginTop: '5px',
+              }}>
+                  Code
+              </span>
+              <button onClick={handleCopy} style = {{ marginLeft: 'auto', marginRight: '0' }}>
+                <ContentCopyIcon />
+                Copy
+              </button>
+            </div>
+            <Box>         
+                <code style={codeStyle}
+              dangerouslySetInnerHTML={{ __html: codeA }}></code>
+            </Box>
+          </div>  
+
+          <Box style= {{
+              display: 'block',
+              width: '80%',
+              margin: '0 auto',
+              padding: '1rem',
+              textAlign: 'center',
+            }}>
+              <pre>
+{secondText}
+              </pre>
           </Box>
         </div>
       </pre>
